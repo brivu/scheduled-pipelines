@@ -46,5 +46,7 @@ else
     fi
 fi
 
+jq '.' status.json
+
 rm -rf status.json
 rm -rf all_schedules.json
