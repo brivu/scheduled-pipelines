@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  scheduled-piplines: brivu/scheduled-piplines@dev:<<pipeline.git.revision>>
+  scheduled-pipelines: brivu/scheduled-pipelines@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.5
 
 filters: &filters
@@ -24,7 +24,7 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: brivu/scheduled-piplines
+          orb-name: brivu/scheduled-pipelines
           vcs-type: << pipeline.project.type >>
           pub-type: production
           requires:
