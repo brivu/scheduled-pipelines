@@ -13,7 +13,7 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-      - create-and-update-schedule:
+      - scheduled-pipelines/create-and-update-schedule:
           project-name: "scheduled-pipelines"
           vcs-type: "gh"
           namespace: "brivu"
