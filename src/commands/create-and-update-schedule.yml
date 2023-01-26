@@ -8,7 +8,7 @@ parameters:
   circle-token:
     type: env_var_name
     default: CIRCLE_TOKEN
-    description: > 
+    description: >
       The personal API Token associated with the project.
   project-name:
     type: string
@@ -22,11 +22,11 @@ parameters:
       The VCS type for the project. GitHub and BitBucket are currently supported with GitHub being the default value.
   namespace:
     type: string
-    description: > 
+    description: >
       The username or organization name in the specified version control system.
   schedule-path:
     type: string
-    description: > 
+    description: >
       The location of the json pipeline schedule to be created or updated (relative or absolute).
       The json structure of the schedule can be found here: https://circleci.com/docs/scheduled-pipelines/
 steps:
