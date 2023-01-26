@@ -14,13 +14,11 @@ jobs:
     steps:
       - checkout
       - scheduled-pipelines/create-and-update-schedule:
-          name: Create monthly schedule.
           project-name: "scheduled-pipelines"
           vcs-type: "gh"
           namespace: "brivu"
           schedule-path: "./sample/once-a-month.json"
       - scheduled-pipelines/create-and-update-schedule:
-          name: Create weekly schedule.
           project-name: "scheduled-pipelines"
           vcs-type: "gh"
           namespace: "brivu"
