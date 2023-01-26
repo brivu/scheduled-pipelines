@@ -9,6 +9,11 @@ curl --request GET \
   --url "${URL}" \
   --header "Circle-Token: $CIRCLE_TOKEN" > all_schedules.json
 
+if jq '.' -c all_schedules.json | grep "Project not found"; then
+  echo "The specified project is not found. Please check the project name."
+  exit 1
+fi
+
 if jq ".items[] | .name" all_schedules.json | grep "${SCHEDULE_NAME}"; then
         SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"${SCHEDULE_NAME}"') | .id' all_schedules.json)
         echo "The ID is ${SCHEDULE_ID}"
