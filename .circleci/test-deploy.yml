@@ -8,13 +8,18 @@ filters: &filters
     only: /.*/
 
 jobs:
-  # Create a job to test the commands of your orbs.
   command-tests:
     docker:
       - image: cimg/base:current
     steps:
+      - checkout
+      - create-and-update-schedule:
+          project-name: "scheduled-pipelines"
+          vcs-type: "gh"
+          namespace: "brivu"
+          schedule-path: "./sample/once-a-month.json"
       - run: 
-          echo "Hello world!""
+          echo "Hello world!"
 workflows:
   test-deploy:
     jobs:
@@ -35,5 +40,3 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
-
-# VS Code Extension Version: 1.4.0

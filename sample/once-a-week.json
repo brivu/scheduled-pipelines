@@ -1,0 +1,18 @@
+{
+    "name": "Test for once a week on a tuesday at 12pm",
+    "timetable": {
+      "per-hour": 1,
+      "hours-of-day": [
+        12
+      ],
+      "days-of-week": [
+        "TUE"
+      ]
+    },
+    "attribution-actor": "current",
+    "parameters": {
+      "deploy_prod": false,
+      "branch": "feature/a-cool-button"
+    },
+    "description": "Every Tuesday at 11pm"
+  }
