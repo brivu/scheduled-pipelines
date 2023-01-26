@@ -38,12 +38,11 @@ else
       --header "Circle-Token: ${CIRCLE_TOKEN}" \
       --header 'content-type: application/json' \
       --data "${DATA}" > status.json
-
   set +x
     if jq '.' -c status.json | grep "Invalid input" > /dev/null; then
-    echo -e "\nPlease recheck your json schedule\n"
-    jq '.message' -rc status.json
-    exit 1
+      echo -e "\nPlease recheck your json schedule\n"
+      jq '.message' -rc status.json
+      exit 1
     fi
 fi
 

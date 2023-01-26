@@ -1,7 +1,7 @@
 {
     "name": "Every month",
     "timetable": {
-      "per-hour": 0,
+      "per-hour": 1,
       "hours-of-day": [
         23
       ],
