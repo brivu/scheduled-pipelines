@@ -5,9 +5,11 @@ URL="https://circleci.com/api/v2/project/${ORB_VAL_VCS_TYPE}/${ORB_VAL_NAMESPACE
 DATA=$(jq '.' -c "${ORB_EVAL_SCHEDULE_JSON_PATH}")
 SCHEDULE_NAME=$(jq '.name' "${ORB_EVAL_SCHEDULE_JSON_PATH}")
 
-curl --request GET \
+curl -s --request GET \
   --url "${URL}" \
   --header "Circle-Token: $CIRCLE_TOKEN" > all_schedules.json
+
+jq '.' all_schedules.json
 
 if jq '.' -c all_schedules.json | grep "Project not found" > /dev/null; then
   echo "The specified project is not found. Please check the project name."
@@ -17,7 +19,7 @@ fi
 if jq ".items[] | .name" all_schedules.json | grep "${SCHEDULE_NAME}"; then
   SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"${SCHEDULE_NAME}"') | .id' all_schedules.json)
   set -x
-  curl --request PATCH \
+  curl -s --request PATCH \
       --url https://circleci.com/api/v2/schedule/"${SCHEDULE_ID}" \
       --header "Circle-Token: ${CIRCLE_TOKEN}" \
       --header 'content-type: application/json' \
@@ -33,7 +35,7 @@ if jq ".items[] | .name" all_schedules.json | grep "${SCHEDULE_NAME}"; then
 else
 
   set -x
-  curl --request POST \
+  curl -s --request POST \
       --url "${URL}" \
       --header "Circle-Token: ${CIRCLE_TOKEN}" \
       --header 'content-type: application/json' \
