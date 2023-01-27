@@ -12,7 +12,7 @@ curl -s --request GET \
 jq '.' all_schedules.json
 
 if jq '.' -c all_schedules.json | grep "Project not found" > /dev/null; then
-  echo "The specified project is not found. Please check the project name."
+  echo "The specified project is not found. Please check the project name vcs type or namespace."
   exit 1
 fi
 
@@ -25,12 +25,6 @@ if jq ".items[] | .name" all_schedules.json | grep "${SCHEDULE_NAME}"; then
       --header 'content-type: application/json' \
       --data "${DATA}" > status.json
   set +x 
-  
-  if jq '.' -c status.json | grep "Invalid input" > /dev/null; then
-    echo -e "\nPlease recheck your json schedule\n"
-    jq '.message' -rc status.json
-    exit 1
-  fi
 
 else
 

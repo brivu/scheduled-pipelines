@@ -23,6 +23,8 @@ jobs:
           vcs-type: "gh"
           namespace: "brivu"
           schedule-path: "./sample/once-a-week.json"
+      - scheduled-pipelines/delete-schedule:
+          schedule-name: "Every month"
       - run: 
           echo "Hello world!"
 workflows:
