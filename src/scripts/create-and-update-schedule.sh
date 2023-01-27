@@ -18,6 +18,7 @@ fi
 
 if jq ".items[] | .name" all_schedules.json | grep "${SCHEDULE_NAME}"; then
   SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"${SCHEDULE_NAME}"') | .id' all_schedules.json)
+  echo "ID=${SCHEDULE_ID}"
   set -x
   curl -s --request PATCH \
       --url https://circleci.com/api/v2/schedule/"${SCHEDULE_ID}" \
