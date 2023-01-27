@@ -21,7 +21,7 @@ parameters:
   namespace:
     type: string
     description: >
-      The username or organization name in the specified version control system.      
+      The username or organization name in the specified version control system.
   schedule-name:
     type: string
     description: >
