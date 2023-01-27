@@ -1,6 +1,8 @@
 #!/bin/bash
 ORB_EVAL_SCHEDULE_NAME=$(eval echo "${ORB_EVAL_SCHEDULE_NAME}")
-ORB_EVAL_SCHEDULE_JSON_PATH=$(eval echo "${ORB_EVAL_SCHEDULE_JSON_PATH}")
+ORB_EVAL_PROJECT_NAME=$(eval echo "${ORB_EVAL_PROJECT_NAME}")
+URL="https://circleci.com/api/v2/project/${ORB_VAL_VCS_TYPE}/${ORB_VAL_NAMESPACE}/${ORB_EVAL_PROJECT_NAME}/schedule"
+
 
 curl -s --request GET \
   --url "${URL}" \
