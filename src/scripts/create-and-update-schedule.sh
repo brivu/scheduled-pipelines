@@ -1,9 +1,17 @@
 #!/bin/bash
-ORB_EVAL_PROJECT_NAME=$(eval echo "${ORB_EVAL_PROJECT_NAME}")
 ORB_EVAL_SCHEDULE_JSON_PATH=$(eval echo "${ORB_EVAL_SCHEDULE_JSON_PATH}")
-URL="https://circleci.com/api/v2/project/${ORB_VAL_VCS_TYPE}/${ORB_VAL_NAMESPACE}/${ORB_EVAL_PROJECT_NAME}/schedule"
 DATA=$(jq '.' -c "${ORB_EVAL_SCHEDULE_JSON_PATH}")
 SCHEDULE_NAME=$(jq '.name' "${ORB_EVAL_SCHEDULE_JSON_PATH}")
+
+if echo  "${CIRCLE_BUILD_URL}" | grep -E "GitHub|gh" > /dev/null; then
+        VCS="gh"
+elif echo  "${CIRCLE_BUILD_URL}" | grep -E "BitBucke|bb" > /dev/null; then
+        VCS="bb"
+else
+        VCS="circleci"
+fi
+
+URL="https://circleci.com/api/v2/project/${VCS}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/schedule"
 
 curl -s --request GET \
   --url "${URL}" \
@@ -43,6 +51,3 @@ else
 fi
 
 jq '.' status.json
-
-rm -rf status.json
-rm -rf all_schedules.json

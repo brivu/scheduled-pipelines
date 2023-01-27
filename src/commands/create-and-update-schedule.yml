@@ -10,20 +10,6 @@ parameters:
     default: CIRCLE_TOKEN
     description: >
       The personal API Token associated with the project.
-  project-name:
-    type: string
-    description: >
-      The name of project associated with the pipeline.
-  vcs-type:
-    type: enum
-    enum: ["gh", "bb"]
-    default: "gh"
-    description: >
-      The VCS type for the project. GitHub and BitBucket are currently supported with GitHub being the default value.
-  namespace:
-    type: string
-    description: >
-      The username or organization name in the specified version control system.
   schedule-path:
     type: string
     description: >
