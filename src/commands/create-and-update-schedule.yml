@@ -18,9 +18,6 @@ parameters:
 steps:
   - run:
       environment:
-        ORB_EVAL_PROJECT_NAME: << parameters.project-name >>
         ORB_EVAL_SCHEDULE_JSON_PATH: << parameters.schedule-path >>
-        ORB_VAL_VCS_TYPE: << parameters.vcs-type >>
-        ORB_VAL_NAMESPACE: << parameters.namespace >>
       name: Create and Update Schedule
       command: <<include(scripts/create-and-update-schedule.sh)>>
