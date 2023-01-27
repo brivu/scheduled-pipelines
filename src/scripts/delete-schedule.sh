@@ -13,7 +13,7 @@ if jq '.' -c all_schedules.json | grep "Project not found" > /dev/null; then
   exit 1
 fi
 
-if jq ".items[] | .name" all_schedules.json | grep "${ORB_EVAL_SCHEDULE_NAME}"; then
+if jq ".items[] | .name" all_schedules.json | grep "${ORB_EVAL_SCHEDULE_NAME}" > /dev/null; then
   SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"\"${ORB_EVAL_SCHEDULE_NAME}\""') | .id' all_schedules.json)
   
   set -x

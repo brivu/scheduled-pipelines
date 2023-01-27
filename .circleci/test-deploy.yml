@@ -28,6 +28,11 @@ jobs:
           vcs-type: "gh"
           namespace: "brivu"      
           schedule-name: "Every month"
+      - scheduled-pipelines/delete-schedule:
+          project-name: "scheduled-pipelines"
+          vcs-type: "gh"
+          namespace: "brivu"      
+          schedule-name: "Test for once a week on a tuesday at 12pm"
       - run: 
           echo "Hello world!"
 workflows:
