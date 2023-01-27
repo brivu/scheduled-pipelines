@@ -1,5 +1,5 @@
 #!/bin/bash
-ORB_EVAL_SCHEDULE_NAME=$(eval echo \""${ORB_EVAL_SCHEDULE_NAME}"\")
+ORB_EVAL_SCHEDULE_NAME=$(eval echo "${ORB_EVAL_SCHEDULE_NAME}")
 ORB_EVAL_PROJECT_NAME=$(eval echo "${ORB_EVAL_PROJECT_NAME}")
 URL="https://circleci.com/api/v2/project/${ORB_VAL_VCS_TYPE}/${ORB_VAL_NAMESPACE}/${ORB_EVAL_PROJECT_NAME}/schedule"
 
@@ -14,7 +14,7 @@ if jq '.' -c all_schedules.json | grep "Project not found" > /dev/null; then
 fi
 
 if jq ".items[] | .name" all_schedules.json | grep "${ORB_EVAL_SCHEDULE_NAME}"; then
-  SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"${ORB_EVAL_SCHEDULE_NAME}"') | .id' all_schedules.json)
+  SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"\"${ORB_EVAL_SCHEDULE_NAME}\""') | .id' all_schedules.json)
   
   set -x
   curl -s --request DELETE \
