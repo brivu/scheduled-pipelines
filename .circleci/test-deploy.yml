@@ -94,15 +94,15 @@ workflows:
     jobs:
       - scheduled-pipelines/update-schedules:
           name: integration-test
-          pre-steps:
-            - load-schedules:
-                schedule-path: "./sample/initial-schedules.json"
+          # pre-steps:
+          #   - load-schedules:
+          #       schedule-path: "./sample/initial-schedules.json"
           schedule-path: "./sample/updated-schedules.json"
           post-steps:
             - run:
                 name: Validating remaining schedules
                 command: |
-                  if jq -cr '.items[].name' j.json | grep -E "schedule4|schedule5|schedule6"; then
+                  if jq -cr '.items[].name' current_schedules.json | grep -E "schedule4|schedule5|schedule6"; then
                     exit 0
                   else
                     echo "Only schedule4, schedule5 and schedule6 should remain. Please recheck jobs"
