@@ -41,7 +41,7 @@ commands:
             fi
 
             if jq ".items[] | .name" existing_schedules.json | grep "<< parameters.schedule-name >>" > /dev/null; then
-              SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"<< parameters.schedule-name >>"') | .id' existing_schedules.json)
+              SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"\"<< parameters.schedule-name >>\""') | .id' existing_schedules.json)
               
               set -x
               curl -s --request DELETE \
