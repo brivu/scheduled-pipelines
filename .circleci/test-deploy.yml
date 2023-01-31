@@ -22,6 +22,7 @@ workflows:
       - scheduled-pipelines/update-schedules:
           name: integration-test
           pre-steps:
+            - checkout
             - scheduled-pipelines/update-schedules:
                 schedule-path: "./sample/initial-schedules.json"
           executor: linux
