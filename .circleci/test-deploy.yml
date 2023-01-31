@@ -119,9 +119,8 @@ workflows:
             - run:
                 name: Verifying deletion of all schedules.
                 command: |
-                  echo "${SCHEDULE_DATA}"
-                  data=$(jq -c '.items[]' "${SCHEDULE_DATA}/current_schedules.json")
-                  if [ -z "${data}" ]; then 
+                  length=$(jq -c '.items | length' "${SCHEDULE_DATA}/current_schedules.json" )
+                  if [ "${length}" -gt 0 ]; then 
                     exit 0
                   else
                     echo "All schedules should be deleted. Please recheck jobs"
