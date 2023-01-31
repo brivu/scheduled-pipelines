@@ -21,7 +21,7 @@ workflows:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       - scheduled-pipelines/update-schedules:
           pre-steps:
-            - update-schedules:
+            - scheduled-pipelines/update-schedules:
                 schedule-path: "./sample/initial-schedules.json"
           executor: linux
           schedule-path: "./sample/initial-schedules.json"
