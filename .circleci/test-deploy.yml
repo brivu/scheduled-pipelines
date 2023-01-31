@@ -77,7 +77,7 @@ commands:
             else
               VCS="circleci"
             fi
-
+            URL="https://circleci.com/api/v2/project/${VCS}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/schedule"
             jq -c '.schedules[]' "<< parameters.schedule-path >>" | while read -r new_schedule;
             do
               set -x
