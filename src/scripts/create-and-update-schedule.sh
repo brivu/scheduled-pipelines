@@ -27,7 +27,7 @@ fi
 jq -cr '.items[] | .name' current_schedules.json | while read -r current_schedule_names; 
 do
     if echo "$UPDATED_SCHEDULES" |  grep -v  "${current_schedule_names}" > /dev/null; then
-        SCHEDULE_ID=$(jq -r '.items[] | select( .name == '\""${current_schedule_names}"\"') | .id' all.json)
+        SCHEDULE_ID=$(jq -r '.items[] | select( .name == '\""${current_schedule_names}"\"') | .id' current_schedules.json)
             set -x
             curl -s --request DELETE \
             --url https://circleci.com/api/v2/schedule/"${SCHEDULE_ID}" \
@@ -42,7 +42,7 @@ jq -c '.schedules[]' "${ORB_EVAL_SCHEDULE_JSON_PATH}" | while read -r new_schedu
 do
     new_schedule_name=$(echo "${new_schedule}" | jq -cr '.name')
     if echo "${CURRENT_SCHEDULES}" | grep "${new_schedule_name}" >/dev/null; then
-        SCHEDULE_ID=$(jq -r '.items[] | select( .name == '\""${new_schedule_name}\""') | .id' all.json)
+        SCHEDULE_ID=$(jq -r '.items[] | select( .name == '\""${new_schedule_name}\""') | .id' current_schedules.json)
         set -x
         curl -s --request PATCH \
         --url https://circleci.com/api/v2/schedule/"${SCHEDULE_ID}" \
