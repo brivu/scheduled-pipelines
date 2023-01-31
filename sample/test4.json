@@ -1,5 +1,5 @@
 {
-    "name": "Every month",
+    "name": "Test4",
     "timetable": {
       "per-hour": 1,
       "hours-of-day": [
@@ -16,4 +16,3 @@
     },
     "description": "Every 23rd of the month"
   } 
-  

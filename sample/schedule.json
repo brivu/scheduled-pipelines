@@ -1,0 +1,27 @@
+{
+    "schedules": [{
+      "name": "my schedule name",
+      "description": "some description",
+      "attribution-actor": "system",
+      "parameters": {
+        "branch": "main"
+      },
+      "timetable": {
+          "per-hour": 3,
+          "hours-of-day": [1,15],
+          "days-of-week": ["MON", "WED"]
+      }},
+      {
+        "name": "my schedule name2",
+        "description": "some description",
+        "attribution-actor": "system",
+        "parameters": {
+          "branch": "main"
+        },
+        "timetable": {
+            "per-hour": 1,
+            "hours-of-day": [15],
+            "days-of-week": ["WED"]
+        }
+        }]
+ }
