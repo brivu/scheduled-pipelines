@@ -14,15 +14,15 @@ jobs:
     steps:
       - checkout
       - scheduled-pipelines/create-and-update-schedule:
-          schedule-path: "./sample/test1.json"
-      - scheduled-pipelines/create-and-update-schedule:
-          schedule-path: "./sample/test2.json"
-      - scheduled-pipelines/create-and-update-schedule:
-          schedule-path: "./sample/test3.json"
-      - scheduled-pipelines/create-and-update-schedule:
-          schedule-path: "./sample/test4.json"
-      - scheduled-pipelines/create-and-update-schedule:
-          schedule-path: "./sample/test5.json"
+          schedule-path: "./sample/schedules.json"
+      # - scheduled-pipelines/create-and-update-schedule:
+      #     schedule-path: "./sample/test2.json"
+      # - scheduled-pipelines/create-and-update-schedule:
+      #     schedule-path: "./sample/test3.json"
+      # - scheduled-pipelines/create-and-update-schedule:
+      #     schedule-path: "./sample/test4.json"
+      # - scheduled-pipelines/create-and-update-schedule:
+      #     schedule-path: "./sample/test5.json"
       # - scheduled-pipelines/delete-schedule:
       #     project-name: "scheduled-pipelines"
       #     vcs-type: "gh"
