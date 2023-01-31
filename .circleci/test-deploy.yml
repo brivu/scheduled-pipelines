@@ -20,6 +20,7 @@ workflows:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       - scheduled-pipelines/update-schedules:
+          name: integration-test
           pre-steps:
             - scheduled-pipelines/update-schedules:
                 schedule-path: "./sample/initial-schedules.json"
@@ -42,7 +43,7 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - command-tests
+            - integration-test
           filters:
             branches:
               ignore: /.*/
