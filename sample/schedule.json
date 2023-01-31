@@ -1,27 +1,55 @@
 {
     "schedules": [{
-      "name": "my schedule name",
-      "description": "some description",
-      "attribution-actor": "system",
-      "parameters": {
-        "branch": "main"
-      },
-      "timetable": {
-          "per-hour": 3,
-          "hours-of-day": [1,15],
-          "days-of-week": ["MON", "WED"]
-      }},
-      {
-        "name": "my schedule name2",
-        "description": "some description",
-        "attribution-actor": "system",
-        "parameters": {
-          "branch": "main"
-        },
+        "name": "Test4",
         "timetable": {
-            "per-hour": 1,
-            "hours-of-day": [15],
-            "days-of-week": ["WED"]
-        }
-        }]
+          "per-hour": 1,
+          "hours-of-day": [
+            23
+          ],
+          "days-of-month": [
+            23
+          ]
+        },
+        "attribution-actor": "current",
+        "parameters": {
+          "deploy_prod": false,
+          "branch": "feature/a-cool-button"
+        },
+        "description": "Every 23rd of the month"
+      } ,
+      {
+        "name": "Test5",
+        "timetable": {
+          "per-hour": 1,
+          "hours-of-day": [
+            23
+          ],
+          "days-of-month": [
+            23
+          ]
+        },
+        "attribution-actor": "current",
+        "parameters": {
+          "deploy_prod": false,
+          "branch": "feature/a-cool-button"
+        },
+        "description": "Every 23rd of the month"
+      }, {
+        "name": "Test6",
+        "timetable": {
+          "per-hour": 1,
+          "hours-of-day": [
+            23
+          ],
+          "days-of-month": [
+            23
+          ]
+        },
+        "attribution-actor": "current",
+        "parameters": {
+          "deploy_prod": false,
+          "branch": "feature/a-cool-button"
+        },
+        "description": "Every 23rd of the month"
+      } ]
  }
