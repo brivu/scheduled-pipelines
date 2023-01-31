@@ -38,3 +38,9 @@ if jq ".items[] | .name" existing_schedules.json | grep "${ORB_EVAL_SCHEDULE_NAM
 else
   echo "\"${ORB_EVAL_SCHEDULE_NAME}\" is not found. Please choose a valid schedule."
 fi
+
+curl -s --request GET \
+  --url "${URL}" \
+  --header "Circle-Token: $CIRCLE_TOKEN" > current_schedules.json
+
+jq '.' current_schedules.json

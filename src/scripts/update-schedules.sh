@@ -66,4 +66,8 @@ do
       fi
 done
 
-jq '.' status.json
+curl -s --request GET \
+  --url "${URL}" \
+  --header "Circle-Token: $CIRCLE_TOKEN" > current_schedules.json
+
+jq '.' current_schedules.json
