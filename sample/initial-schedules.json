@@ -1,6 +1,6 @@
 {
     "schedules": [{
-        "name": "Test1",
+        "name": "Schedule1",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [
@@ -18,7 +18,7 @@
         "description": "Every 23rd of the month"
       } ,
       {
-        "name": "Test2",
+        "name": "Schedule2",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [
@@ -35,7 +35,7 @@
         },
         "description": "Every 23rd of the month"
       }, {
-        "name": "Test3",
+        "name": "Schedule3",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [
@@ -53,7 +53,7 @@
         "description": "Every 23rd of the month"
       },
       {
-        "name": "Test4",
+        "name": "Schedule4",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [
@@ -71,7 +71,7 @@
         "description": "Every 23rd of the month"
       },
       {
-        "name": "Test5",
+        "name": "Schedule5",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [

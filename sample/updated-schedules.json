@@ -1,6 +1,6 @@
 {
     "schedules": [{
-        "name": "Test4",
+        "name": "Schedule4",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [
@@ -18,7 +18,7 @@
         "description": "Every 23rd of the month"
       } ,
       {
-        "name": "Test5",
+        "name": "Schedule5",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [
@@ -35,7 +35,7 @@
         },
         "description": "Every 23rd of the month"
       }, {
-        "name": "Test6",
+        "name": "Schedule6",
         "timetable": {
           "per-hour": 1,
           "hours-of-day": [

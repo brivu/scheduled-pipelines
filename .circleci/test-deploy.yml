@@ -13,8 +13,6 @@ commands:
       circle-token:
         type: env_var_name
         default: CIRCLE_TOKEN
-        description: >
-          The personal API Token associated with the project.
       schedule-name:
         type: string
         description: >
@@ -59,6 +57,39 @@ commands:
               --header "Circle-Token: $CIRCLE_TOKEN" > current_schedules.json
 
             jq '.' current_schedules.json  
+  load-schedules:
+    parameters:
+      circle-token:
+        type: env_var_name
+        default: CIRCLE_TOKEN
+      schedule-path:
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Loading schedules for testing
+          command: |
+            UPDATED_SCHEDULES=$(jq '.schedules' -c "<< parameters.schedule-path >>")
+            SCHEDULE_DATA=$(mktemp -d)
+            if echo  "${CIRCLE_BUILD_URL}" | grep -E "GitHub|gh" > /dev/null; then
+              VCS="gh"
+            elif echo  "${CIRCLE_BUILD_URL}" | grep -E "BitBucket|bb" > /dev/null; then
+              VCS="bb"
+            else
+              VCS="circleci"
+            fi
+            
+            CURRENT_SCHEDULES=$(jq -cr '.items[]'  "${SCHEDULE_DATA}/current_schedules.json")
+            jq -c '.schedules[]' "<< parameters.schedule-path >>" | while read -r new_schedule;
+            do
+              set -x
+              curl -s --request POST \
+                  --url "${URL}" \
+                  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+                  --header 'content-type: application/json' \
+                  --data "${new_schedule}" > status.json
+              set +x
+            done
 
 workflows:
   test-deploy:
@@ -66,17 +97,25 @@ workflows:
       - scheduled-pipelines/update-schedules:
           name: integration-test
           pre-steps:
-            - checkout
-            - scheduled-pipelines/update-schedules:
+            - load-schedules:
                 schedule-path: "./sample/initial-schedules.json"
           schedule-path: "./sample/updated-schedules.json"
           post-steps:
+            - run:
+                name: Validating remaining schedules
+                command: |
+                  if jq -cr '.items[].name' j.json | grep -E "schedule4|schedule5|schedule6"; then
+                    exit 0
+                  else
+                    echo "Only schedule4, schedule5 and schedule6 should remain. Please recheck jobs"
+                    exit 1
+                  fi
             - delete-schedule:
-                schedule-name: Test4
+                schedule-name: Schedule4
             - delete-schedule:
-                schedule-name: Test5
+                schedule-name: Schedule5
             - delete-schedule:
-                schedule-name: Test6
+                schedule-name: Schedule6
             - run:
                 name: Verifying deletion of all schedules.
                 command: |
