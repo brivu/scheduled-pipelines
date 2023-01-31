@@ -6,6 +6,10 @@ description: >
   contains a schedule that does not exist in the provided json file, it will be deleted.
 executor: << parameters.executor >>
 parameters:
+  executor:
+    description: |
+      Executor to use for this job.
+    type: executor
   circle-token:
     type: env_var_name
     default: CIRCLE_TOKEN
