@@ -8,4 +8,4 @@ usage:
     update-pipeline-schedules:
       jobs:
         - orb-scheduled-pipelines/update-schedules:
-            schedule-path: ./path/to/schedules.json  
+            schedule-path: ./path/to/schedules.json
