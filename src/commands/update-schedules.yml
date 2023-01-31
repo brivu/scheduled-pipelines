@@ -1,8 +1,8 @@
 description: >
   This command updates a pipeline's existing schedules from the json file that the user
-  provides. It checks for existing schedules based the schedule's name. If the file contains 
-  a schedule that does not exist in the pipeline, a new one will be created. If the schedule 
-  does exist, it will be updated with the values provided in the json file. If the pipeline 
+  provides. It checks for existing schedules based the schedule's name. If the file contains
+  a schedule that does not exist in the pipeline, a new one will be created. If the schedule
+  does exist, it will be updated with the values provided in the json file. If the pipeline
   contains a schedule that does not exist in the provided json file, it will be deleted.
 
 parameters:
