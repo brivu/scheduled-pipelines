@@ -102,6 +102,8 @@ workflows:
             - run:
                 name: Validating remaining schedules
                 command: |
+                  source $BASH_ENV
+                  echo "${SCHEDULE_DATA}"                
                   if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep -E "schedule4|schedule5|schedule6"; then
                     exit 0
                   else
