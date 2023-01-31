@@ -21,7 +21,7 @@ commands:
           The name of project associated with the pipeline.
     steps:
       - run:
-          name: Deleting << parameters.schedule-name >>
+          name: Deleting Schedule - << parameters.schedule-name >>
           command: |
             if echo  "${CIRCLE_BUILD_URL}" | grep -E "GitHub|gh" > /dev/null; then
               VCS="gh"
@@ -51,7 +51,7 @@ commands:
 
               jq '.' status.json
             else
-              echo "\"${ORB_EVAL_SCHEDULE_NAME}\" is not found. Please choose a valid schedule."
+              echo "<< parameters.schedule-name >> is not found. Please choose a valid schedule."
             fi
 
             curl -s --request GET \
