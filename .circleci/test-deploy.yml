@@ -23,7 +23,7 @@ workflows:
           pre-steps:
             - update-schedules:
                 schedule-path: "./sample/initial-schedules.json"
-          executor: docker
+          executor: base
           schedule-path: "./sample/initial-schedules.json"
           post-steps:
             - delete-schedule:
@@ -49,6 +49,7 @@ workflows:
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
 executors:
-  docker:
-    - image: cimg/base:current
+  base:
+    docker:
+      - image: cimg/base:current
 
