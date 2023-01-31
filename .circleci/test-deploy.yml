@@ -26,11 +26,11 @@ workflows:
           executor: linux
           schedule-path: "./sample/initial-schedules.json"
           post-steps:
-            - delete-schedule:
+            - scheduled-pipelines/delete-schedule:
                 schedule-name: test4
-            - delete-schedule:
+            - scheduled-pipelines/delete-schedule:
                 schedule-name: test5
-            - delete-schedule:
+            - scheduled-pipelines/delete-schedule:
                 schedule-name: test6
 
           filters: *filters
