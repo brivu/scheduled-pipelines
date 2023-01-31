@@ -66,30 +66,4 @@ do
       fi
 done
 
-# if jq ".items[] | .name" current_schedules.json | grep "${SCHEDULE_NAME}"; then
-#   SCHEDULE_ID=$(jq -r '.items[] | select( .name == '"${SCHEDULE_NAME}"') | .id' current_schedules.json)
-#   set -x
-#   curl -s --request PATCH \
-#       --url https://circleci.com/api/v2/schedule/"${SCHEDULE_ID}" \
-#       --header "Circle-Token: ${CIRCLE_TOKEN}" \
-#       --header 'content-type: application/json' \
-#       --data "${DATA}" > status.json
-#   set +x 
-
-# else
-
-#   set -x
-#   curl -s --request POST \
-#       --url "${URL}" \
-#       --header "Circle-Token: ${CIRCLE_TOKEN}" \
-#       --header 'content-type: application/json' \
-#       --data "${DATA}" > status.json
-#   set +x
-#     if jq '.' -c status.json | grep "Invalid input" > /dev/null; then
-#       echo -e "\nPlease recheck your json schedule\n"
-#       jq '.message' -rc status.json
-#       exit 1
-#     fi
-# fi
-
 jq '.' status.json

@@ -1,0 +1,24 @@
+description: >
+  This command updates a pipeline's existing schedules from the json file that the user
+  provides. It checks for existing schedules based the schedule's name. If the file contains 
+  a schedule that does not exist in the pipeline, a new one will be created. If the schedule 
+  does exist, it will be updated with the values provided in the json file. If the pipeline 
+  contains a schedule that does not exist in the provided json file, it will be deleted.
+
+parameters:
+  circle-token:
+    type: env_var_name
+    default: CIRCLE_TOKEN
+    description: >
+      The personal API Token associated with the project.
+  schedule-path:
+    type: string
+    description: >
+      The location of the json pipeline schedule to be created or updated (relative or absolute).
+      The json structure of the schedule can be found here: https://circleci.com/docs/scheduled-pipelines/
+steps:
+  - run:
+      environment:
+        ORB_EVAL_SCHEDULE_JSON_PATH: << parameters.schedule-path >>
+      name: Update schedule from << parameters.schedule-path >>
+      command: <<include(scripts/update-schedules.sh)>>

@@ -2,7 +2,7 @@ version: 2.1
 
 description: >
   Scheduled pipelines allows customers to trigger CircleCI pipelines periodically based on a schedule.
-  The Scheduled Pipelines Orb enables customers to create, update or delete pipeline schedules for a specified project.
+  The Scheduled Pipelines Orb enables customers update pipeline schedules through a valid json file.
 
 display:
   source_url: "https://github.com/brivu/scheduled-piplines"

@@ -7,39 +7,32 @@ filters: &filters
   tags:
     only: /.*/
 
-jobs:
-  command-tests:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - checkout
-      - scheduled-pipelines/create-and-update-schedule:
-          schedule-path: "./sample/schedules.json"
-      # - scheduled-pipelines/create-and-update-schedule:
-      #     schedule-path: "./sample/test2.json"
-      # - scheduled-pipelines/create-and-update-schedule:
-      #     schedule-path: "./sample/test3.json"
-      # - scheduled-pipelines/create-and-update-schedule:
-      #     schedule-path: "./sample/test4.json"
-      # - scheduled-pipelines/create-and-update-schedule:
-      #     schedule-path: "./sample/test5.json"
-      # - scheduled-pipelines/delete-schedule:
-      #     project-name: "scheduled-pipelines"
-      #     vcs-type: "gh"
-      #     namespace: "brivu"      
-      #     schedule-name: "Every month"
-      # - scheduled-pipelines/delete-schedule:
-      #     project-name: "scheduled-pipelines"
-      #     vcs-type: "gh"
-      #     namespace: "brivu"      
-      #     schedule-name: "Test for once a week on a tuesday at 12pm"
-      - run: 
-          echo "Hello world!"
+# jobs:
+#   command-tests:
+#     docker:
+#       - image: cimg/base:current
+#     steps:
+#       - checkout
+#       - scheduled-pipelines/create-and-update-schedule:
+#           schedule-path: "./sample/schedules.json"
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - command-tests:
+      - scheduled-pipelines/update-schedules:
+          pre-steps:
+            - update-schedules:
+                schedule-path: "./sample/initial-schedules.json"
+          executor: docker
+          schedule-path: "./sample/initial-schedules.json"
+          post-steps:
+            - delete-schedule:
+                schedule-name: test4
+            - delete-schedule:
+                schedule-name: test5
+            - delete-schedule:
+                schedule-name: test6
+
           filters: *filters
       - orb-tools/pack:
           filters: *filters
@@ -55,3 +48,7 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+executors:
+  docker:
+    - image: cimg/base:current
+
