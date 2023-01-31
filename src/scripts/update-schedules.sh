@@ -2,6 +2,7 @@
 ORB_EVAL_SCHEDULE_JSON_PATH=$(eval echo "${ORB_EVAL_SCHEDULE_JSON_PATH}")
 UPDATED_SCHEDULES=$(jq '.schedules' -c "${ORB_EVAL_SCHEDULE_JSON_PATH}")
 SCHEDULE_DATA=$(mktemp -d)
+export SCHEDULE_DATA
 if echo  "${CIRCLE_BUILD_URL}" | grep -E "GitHub|gh" > /dev/null; then
         VCS="gh"
 elif echo  "${CIRCLE_BUILD_URL}" | grep -E "BitBucket|bb" > /dev/null; then
