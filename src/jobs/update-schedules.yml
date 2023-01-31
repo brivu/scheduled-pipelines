@@ -22,5 +22,5 @@ parameters:
       The json structure of the schedule can be found here: https://circleci.com/docs/scheduled-pipelines/
 steps:
   - checkout
-  - update-schedules:
+  - scheduled-pipelines/update-schedules:
       schedule-path: << parameters.schedule-path >>
