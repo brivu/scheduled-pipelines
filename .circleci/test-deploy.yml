@@ -29,11 +29,11 @@ workflows:
           schedule-path: "./sample/updated-schedules.json"
           post-steps:
             - scheduled-pipelines/delete-schedule:
-                schedule-name: test4
+                schedule-name: Test4
             - scheduled-pipelines/delete-schedule:
-                schedule-name: test5
+                schedule-name: Test5
             - scheduled-pipelines/delete-schedule:
-                schedule-name: test6
+                schedule-name: Test6
 
           filters: *filters
       - orb-tools/pack:
