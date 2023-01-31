@@ -94,9 +94,9 @@ workflows:
     jobs:
       - scheduled-pipelines/update-schedules:
           name: integration-test
-          # pre-steps:
-          #   - load-schedules:
-          #       schedule-path: "./sample/initial-schedules.json"
+          pre-steps:
+            - load-schedules:
+                schedule-path: "./sample/initial-schedules.json"
           schedule-path: "./sample/updated-schedules.json"
           post-steps:
             - run:
@@ -120,7 +120,8 @@ workflows:
                 name: Verifying deletion of all schedules.
                 command: |
                   echo "${SCHEDULE_DATA}"
-                  if [ -z $(jq -c '.items[]' "${SCHEDULE_DATA}/current_schedules.json") ]; then 
+                  data=$(jq -c '.items[]' "${SCHEDULE_DATA}/current_schedules.json")
+                  if [ -z "${data}" ]; then 
                     exit 0
                   else
                     echo "All schedules should be deleted. Please recheck jobs"
