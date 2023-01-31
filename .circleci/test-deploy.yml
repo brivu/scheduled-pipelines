@@ -36,12 +36,12 @@ workflows:
                 schedule-name: Test6
             - run:
                 command: |
-                if [ -z $(jq -c '.items[]' current_schedules.json) ]; then 
-                  exit 0
-                else
-                  echo "All schedules should be deleted. Please recheck jobs"
-                  exit 1
-                fi
+                  if [ -z $(jq -c '.items[]' current_schedules.json) ]; then 
+                    exit 0
+                  else
+                    echo "All schedules should be deleted. Please recheck jobs"
+                    exit 1
+                  fi
 
           filters: *filters
       - orb-tools/pack:
