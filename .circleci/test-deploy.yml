@@ -26,7 +26,7 @@ workflows:
             - scheduled-pipelines/update-schedules:
                 schedule-path: "./sample/initial-schedules.json"
           executor: linux
-          schedule-path: "./sample/initial-schedules.json"
+          schedule-path: "./sample/updated-schedules.json"
           post-steps:
             - scheduled-pipelines/delete-schedule:
                 schedule-name: test4
