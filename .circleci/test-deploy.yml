@@ -7,18 +7,9 @@ filters: &filters
   tags:
     only: /.*/
 
-# jobs:
-#   command-tests:
-#     docker:
-#       - image: cimg/base:current
-#     steps:
-#       - checkout
-#       - scheduled-pipelines/create-and-update-schedule:
-#           schedule-path: "./sample/schedules.json"
 workflows:
   test-deploy:
     jobs:
-      # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       - scheduled-pipelines/update-schedules:
           name: integration-test
           pre-steps:
