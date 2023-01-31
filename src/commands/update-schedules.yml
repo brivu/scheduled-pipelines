@@ -10,7 +10,7 @@ parameters:
     type: env_var_name
     default: CIRCLE_TOKEN
     description: >
-      The personal API Token associated with the project.
+      The environment variable containing your personal access token.
   schedule-path:
     type: string
     description: >

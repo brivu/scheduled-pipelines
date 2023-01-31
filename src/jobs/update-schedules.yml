@@ -4,17 +4,15 @@ description: >
   a schedule that does not exist in the pipeline, a new one will be created. If the schedule
   does exist, it will be updated with the values provided in the json file. If the pipeline
   contains a schedule that does not exist in the provided json file, it will be deleted.
-executor: << parameters.executor >>
+docker:
+  - image: cimg/base:current
+resource_class: small
 parameters:
-  executor:
-    description: |
-      Executor to use for this job.
-    type: executor
   circle-token:
     type: env_var_name
     default: CIRCLE_TOKEN
     description: >
-      The personal API Token associated with the project.
+      The environment variable containing your personal access token.
   schedule-path:
     type: string
     description: >
