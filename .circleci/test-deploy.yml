@@ -117,6 +117,8 @@ workflows:
             - run:
                 name: Verifying deletion of all schedules.
                 command: |
+                  source $BASH_ENV
+                  echo "${SCHEDULE_DATA}"
                   if [ -z $(jq -c '.items[]' "${SCHEDULE_DATA}/current_schedules.json") ]; then 
                     exit 0
                   else
