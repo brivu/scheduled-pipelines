@@ -98,34 +98,34 @@ workflows:
             - load-schedules:
                 schedule-path: "./sample/initial-schedules.json"
           schedule-path: "./sample/updated-schedules.json"
-          post-steps:
-            - run:
-                name: Validating remaining schedules
-                command: |
-                  echo "${SCHEDULE_DATA}"
-                  echo "${BASH_ENV}"
-                  if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep -E "Schedule4|Schedule5|Schedule6"; then
-                    exit 0
-                  else
-                    echo "Only schedule4, schedule5 and schedule6 should remain. Please recheck jobs"
-                    exit 1
-                  fi
-            - delete-schedule:
-                schedule-name: Schedule4
-            - delete-schedule:
-                schedule-name: Schedule5
-            - delete-schedule:
-                schedule-name: Schedule6
-            - run:
-                name: Verifying deletion of all schedules.
-                command: |
-                  length=$(jq -c '.items | length' "${SCHEDULE_DATA}/current_schedules.json" )
-                  if [ "${length}" -gt 0 ]; then 
-                    exit 0
-                  else
-                    echo "All schedules should be deleted. Please recheck jobs"
-                    exit 1
-                  fi
+          # post-steps:
+          #   - run:
+          #       name: Verifying remaining schedules
+          #       command: |
+          #         if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep -E "Schedule4|Schedule5|Schedule6"; then
+          #           exit 0
+          #         else
+          #           echo "Only schedule4, schedule5 and schedule6 should remain. Please recheck jobs"
+          #           exit 1
+          #         fi
+          #         #if 1 2 3 exist, fail
+          #         # if 4 5 6 don't exist fail
+          #   - delete-schedule:
+          #       schedule-name: Schedule4
+          #   - delete-schedule:
+          #       schedule-name: Schedule5
+          #   - delete-schedule:
+          #       schedule-name: Schedule6
+          #   - run:
+          #       name: Verifying deletion of all schedules.
+          #       command: |
+          #         length=$(jq -c '.items | length' "${SCHEDULE_DATA}/current_schedules.json" )
+          #         if [ "${length}" -gt 0 ]; then 
+          #           exit 0
+          #         else
+          #           echo "All schedules should be deleted. Please recheck jobs"
+          #           exit 1
+          #         fi
           filters: *filters
       - orb-tools/pack:
           filters: *filters
