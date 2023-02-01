@@ -105,7 +105,7 @@ workflows:
                   if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep -E "Schedule4|Schedule5|Schedule6"; then
                     exit 0
                   else
-                    echo "Only schedule4, schedule5 and schedule6 should remain. Please recheck jobs"
+                    echo "Only Schedule4, Schedule5 and Schedule6 should remain. Please recheck jobs"
                     exit 1
                   fi
                   #if 1 2 3 exist, fail
