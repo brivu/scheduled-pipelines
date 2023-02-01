@@ -13,11 +13,35 @@ fi
 
 URL="https://circleci.com/api/v2/project/${VCS}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/schedule"
 
-curl -s --request GET \
+next_page=$(curl -s --request GET \
   --url "${URL}" \
-  --header "Circle-Token: $CIRCLE_TOKEN" > "${SCHEDULE_DATA}/current_schedules.json"
+  --header "Circle-Token: $CIRCLE_TOKEN")
 
-jq '.' "${SCHEDULE_DATA}/current_schedules.json"
+echo "${next_page}" > "${SCHEDULE_DATA}/current_schedules.json"
+
+while [ "$(echo "$next_page" | jq -rc '.next_page_token')"  != null ];
+do
+        token=$(echo "$next_page" | jq -rc '.next_page_token')
+        URL="https://circleci.com/api/v2/project/${VCS}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/schedule?page-token=${token}"
+        
+        next_page=$(curl -s --request GET \
+        --url "${URL}"   \
+        --header "Circle-Token: $CIRCLE_TOKEN")
+
+        echo "$next_page" | jq -cr '.items' | while read -r schedule
+                do
+                #echo "${schedule}"
+                complete_list=$(jq -rc ".items[.items | length] |= .+ ${schedule}" "${SCHEDULE_DATA}/current_schedules.json")
+                echo "$complete_list" | jq -r '.' > "${SCHEDULE_DATA}/current_schedules.json"
+        done
+
+done
+
+# curl -s --request GET \
+#   --url "${URL}" \
+#   --header "Circle-Token: $CIRCLE_TOKEN" > "${SCHEDULE_DATA}/current_schedules.json"
+
+# jq '.' "${SCHEDULE_DATA}/current_schedules.json"
 
 if jq '.' -c "${SCHEDULE_DATA}/current_schedules.json" | grep "Project not found" > /dev/null; then
   echo "The specified project is not found. Please check the project name vcs type or namespace."

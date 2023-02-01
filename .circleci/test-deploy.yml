@@ -97,7 +97,7 @@ workflows:
           pre-steps:
             - load-schedules:
                 schedule-path: "./sample/initial-schedules.json"
-          schedule-path: "./sample/updatted-schedules.json"
+          schedule-path: "./sample/updated-schedules.json"
           post-steps:
             - run:
                 name: Verifying remaining schedules
