@@ -28,11 +28,11 @@ do
         --url "${URL}"   \
         --header "Circle-Token: $CIRCLE_TOKEN")
 
-        echo "$next_page" | jq -cr '.items' | while read -r schedule
+        echo "$next_page" | jq -cr '.items[]' | while read -r schedule
                 do
                 #echo "${schedule}"
                 complete_list=$(jq -rc ".items[.items | length] |= .+ ${schedule}" "${SCHEDULE_DATA}/current_schedules.json")
-                echo "$complete_list" | jq -r '.items' > "${SCHEDULE_DATA}/current_schedules.json"
+                echo "$complete_list" | jq -r '.items[]' > "${SCHEDULE_DATA}/current_schedules.json"
         done
 
 done
