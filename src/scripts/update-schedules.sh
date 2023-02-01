@@ -84,10 +84,9 @@ do
             fi
       fi
 done
-
-set -x
+URL="https://circleci.com/api/v2/project/${VCS}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/schedule"
 curl -s --request GET \
   --url "${URL}" \
   --header "Circle-Token: $CIRCLE_TOKEN" > "${SCHEDULE_DATA}/current_schedules.json"
-set +x
+
 jq '.' "${SCHEDULE_DATA}/current_schedules.json"
