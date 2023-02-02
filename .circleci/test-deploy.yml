@@ -102,7 +102,6 @@ workflows:
             - run:
                 name: Verifying remaining schedules
                 command: |
-                  #if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep -E "Schedule4|Schedule5|Schedule6"; then
                   if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep "Schedule4" && jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep "Schedule5" && jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep "Schedule6" && [[ $(jq -cr '.items | length' "${SCHEDULE_DATA}/current_schedules.json") == 3 ]];
                   then
                     exit 0
@@ -110,8 +109,6 @@ workflows:
                     echo "Only Schedule4, Schedule5 and Schedule6 should remain. Please recheck jobs"
                     exit 1
                   fi
-                  #if 1 2 3 exist, fail
-                  # if 4 5 6 don't exist fail
             - delete-schedule:
                 schedule-name: Schedule4
             - delete-schedule:
@@ -132,8 +129,10 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: brivu/scheduled-pipelines
+          orb-name: CircleCI-Public/scheduled-pipelines
           vcs-type: << pipeline.project.type >>
+          #github-token:
+          #context:
           pub-type: production
           requires:
             - orb-tools/pack
