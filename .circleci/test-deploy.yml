@@ -104,6 +104,7 @@ workflows:
                 command: |
                   #if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep -E "Schedule4|Schedule5|Schedule6"; then
                   if jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep "Schedule4" && jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep "Schedule5" && jq -cr '.items[].name' "${SCHEDULE_DATA}/current_schedules.json" | grep "Schedule6" && [[ $(jq -cr '.items | length' "${SCHEDULE_DATA}/current_schedules.json") == 3 ]];
+                  then
                     exit 0
                   else
                     echo "Only Schedule4, Schedule5 and Schedule6 should remain. Please recheck jobs"
